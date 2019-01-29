@@ -11,6 +11,18 @@ mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true });
 const app = express();
 app.set('view engine', 'ejs');
 
+app.use(require('express-session')({
+  secret: 'Fat cat sat on the red mat',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.get('/' , (req, res) => {
   res.render('home');
 });

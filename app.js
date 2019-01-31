@@ -68,6 +68,11 @@ app.post('/login', passport.authenticate('local', {
   }
 });
 
+app.get('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/');
+})
+
 app.listen(3000, () => {
   console.log('Server is running...');
 });
